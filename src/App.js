@@ -1,6 +1,7 @@
 import React, { useState, useEffect }from 'react';
 import axios from 'axios';
-import Student from './components/Student'
+import Students from './components/Students';
+
 
 function App() {
   const url = 'https://api.hatchways.io/assessment/students';
@@ -21,9 +22,9 @@ function App() {
   }
 
   return (
-    <div className="App">
-      <Student data={data} />
-    </div>
+    <>
+        <Students data={data}/>
+    </>
   );
 }
 
