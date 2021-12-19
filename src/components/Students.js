@@ -1,18 +1,19 @@
-import React from 'react';
-import Student from './Student';
+import React from "react";
+import Student from "./Student";
 
-import classes from './Students.module.css';
+import classes from "./Students.css";
 
 function Students(props) {
-    const { data, filterName, filterTag } = props;
+  const { data, filteredData, filterName, filterTag } = props;
 
-    return (
-        <div className={classes.students}>
-            <input type='text' onChange={(e) => filterName(e)}></input>
-            <input type='text' onChange={(e) => filterTag(e)}></input>
-            <Student data={data} />
-        </div>
-    )
+  return (
+    <div className="students">
+      <input type="text" onChange={(e) => filterName(e)}></input>
+      <input type="text" onChange={(e) => filterTag(e)}></input>
+      <p>({filteredData.length})</p>
+      <Student filteredData={filteredData} data={data} />
+    </div>
+  );
 }
 
-export default Students
+export default Students;
