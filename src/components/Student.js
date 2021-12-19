@@ -4,7 +4,7 @@ import Grades from "./Grades";
 import classes from "./Student.css";
 
 function Student(props) {
-  const { data, filteredData } = props;
+  const { data, filteredData, addTag } = props;
 
   const expandGrades = (index) => {
     index++;
@@ -27,8 +27,19 @@ function Student(props) {
             <p>Company: {student.company}</p>
             <p>Skill: {student.skill}</p>
             <p>Average: </p>
+            <p>{student.tags}</p>
+            {student.tags.map((tag) => {
+              <p>{tag}</p>;
+            })}
+            <div className="tags">
+              <ul id={student.id}></ul>
+              <input type="text" id={`text_${student.id}`} />
+              <button onClick={() => addTag(student)}>ADD TAG</button>
+            </div>
             <Grades student={student} />
             <button onClick={() => expandGrades(index)}>EXPAND</button>
+            <br></br>
+            <br></br>
             <hr></hr>
           </div>
         );

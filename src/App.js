@@ -5,6 +5,7 @@ import Students from "./components/Students";
 function App() {
   const url = "https://api.hatchways.io/assessment/students";
   const [data, setData] = useState({ dataLoaded: false, students: null });
+  const [tags, setTags] = useState([]);
   const [filteredData, setFilteredData] = useState(null);
   const [filterValues, setFilterValues] = useState({
     nameFilter: "",
@@ -25,11 +26,16 @@ function App() {
   useEffect(() => {
     if (data.dataLoaded) {
       setFilteredData(data.students);
+      data.students.forEach(function (obj) {
+        obj.tags = [];
+      });
+      console.log(data.students);
     }
   }, [data]);
 
   useEffect(() => {
     if (data.dataLoaded) {
+      console.log(filterValues);
       let result = [];
       if (filterValues.nameFilter.indexOf(" ") > 0) {
         result = data.students.filter((x) => {
@@ -51,6 +57,13 @@ function App() {
             return x;
           }
         });
+        if (filterValues.tagFilter.length > 0) {
+          result = result.filter((x) => {
+            if (x.tags.some((y) => y.includes(`${filterValues.tagFilter}`))) {
+              return x;
+            }
+          });
+        }
       }
       setFilteredData(result);
     }
@@ -70,6 +83,15 @@ function App() {
     });
   };
 
+  const addTag = (student) => {
+    let text = document.getElementById("text_" + student.id).value;
+    text = text.toLowerCase();
+    student.tags.push(text);
+    document.getElementById("text_" + student.id).value = "";
+    setTags([...tags, text]);
+    console.log(data);
+  };
+
   return (
     <>
       {data.dataLoaded === false && filteredData === null && <p>loading...</p>}
@@ -79,6 +101,7 @@ function App() {
           data={data}
           filterName={filterName}
           filterTag={filterTag}
+          addTag={addTag}
         />
       )}
     </>
