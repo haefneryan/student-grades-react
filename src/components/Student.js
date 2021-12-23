@@ -8,6 +8,7 @@ function Student(props) {
 
   const expandGrades = (index) => {
     index++;
+    document.getElementById(index).classList.toggle("active");
     let x = document.getElementById(index).style.display;
     if (x === "" || x === "none") {
       document.getElementById(index).style.display = "block";
@@ -17,34 +18,46 @@ function Student(props) {
   };
 
   return (
-    <>
+    <div className="students">
       {filteredData.map((student, index) => {
         return (
-          <div className="student" key={student.id}>
-            <img src={student.pic} />
-            <p>{student.firstName + " " + student.lastName}</p>
-            <p>Email: {student.email}</p>
-            <p>Company: {student.company}</p>
-            <p>Skill: {student.skill}</p>
-            <p>Average: </p>
+          <div className="container" id={index} key={student.id}>
+            <div className="student">
+              <img src={student.pic} />
+              <p className="name">
+                {student.firstName + " " + student.lastName}
+              </p>
+              <div className="info">
+                <p>Email: {student.email}</p>
+                <p>Company: {student.company}</p>
+                <p>Skill: {student.skill}</p>
+                <p>Average: </p>
+              </div>
+            </div>
             <p>{student.tags}</p>
             {student.tags.map((tag) => {
               <p>{tag}</p>;
             })}
             <div className="tags">
-              <ul id={student.id}></ul>
-              <input type="text" id={`text_${student.id}`} />
+              <input
+                className="tagInput"
+                type="text"
+                id={`text_${student.id}`}
+              />
               <button onClick={() => addTag(student)}>ADD TAG</button>
             </div>
             <Grades student={student} />
-            <button onClick={() => expandGrades(index)}>EXPAND</button>
+            <button
+              className="button expandable"
+              onClick={() => expandGrades(index)}
+            ></button>
             <br></br>
             <br></br>
             <hr></hr>
           </div>
         );
       })}
-    </>
+    </div>
   );
 }
 

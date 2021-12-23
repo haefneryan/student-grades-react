@@ -7,10 +7,23 @@ function Students(props) {
   const { data, filteredData, filterName, filterTag, addTag } = props;
 
   return (
-    <div className="students">
-      <input type="text" onChange={(e) => filterName(e)}></input>
-      <input type="text" onChange={(e) => filterTag(e)}></input>
-      <p>({filteredData.length})</p>
+    <div className="boundingBox">
+      <div className="inputBox">
+        <input
+          id="searchBar"
+          type="text"
+          onChange={(e) => filterName(e)}
+          placeholder="Search by Name"
+        ></input>
+      </div>
+      <div className="inputBox">
+        <input
+          id="tagSearchBar"
+          type="text"
+          onChange={(e) => filterTag(e)}
+          placeholder="Search by Tag"
+        ></input>
+      </div>
       <Student filteredData={filteredData} data={data} addTag={addTag} />
     </div>
   );

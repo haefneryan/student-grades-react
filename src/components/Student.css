@@ -1,0 +1,99 @@
+:root {
+  --buttonColor: lightgrey;
+  --minus: block;
+}
+
+.container {
+  position: relative;
+  border-bottom: 1px solid lightgrey;
+}
+
+p {
+  margin: 0;
+  padding-top: 5px;
+}
+
+img {
+  height: 150px;
+  width: 150px;
+  border: 1px solid lightgrey;
+  border-radius: 50%;
+  vertical-align: middle;
+}
+
+.name {
+  display: inline-block;
+  font-weight: bold;
+  font-size: 40px;
+  position: absolute;
+  top: 20px;
+  left: 200px;
+}
+
+.info {
+  display: inline-block;
+  position: absolute;
+  bottom: 20px;
+  font-size: 20px;
+  left: 220px;
+}
+
+.student {
+  position: relative;
+  padding: 20px;
+  height: 200px;
+}
+
+.button {
+  cursor: pointer;
+  position: absolute;
+  right: 30px;
+  top: 75px;
+  height: 50px;
+  width: 50px;
+  background-color: transparent;
+  border: none;
+}
+
+.button::after {
+  content: " ";
+  position: absolute;
+  display: block;
+  background-color: var(--buttonColor);
+  height: 10px;
+  margin-top: -5px;
+  top: 50%;
+  left: 5px;
+  right: 5px;
+  z-index: 10;
+}
+
+.button:hover::after,
+.button:hover::before {
+  background-color: grey;
+}
+
+.button::before {
+  content: " ";
+  position: absolute;
+  display: var(--minus);
+  background-color: var(--buttonColor);
+  height: 10px;
+  margin-top: -5px;
+  top: 50%;
+  left: 5px;
+  right: 5px;
+  z-index: 10;
+}
+
+.tagInput {
+  box-sizing: border-box;
+  width: 20%;
+  height: 30px;
+  padding-left: 20px;
+  border: none;
+  border-bottom: 3px solid lightgrey;
+  outline: none;
+  margin-bottom: 20px;
+  margin-left: 220px;
+}
