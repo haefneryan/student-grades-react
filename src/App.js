@@ -4,7 +4,8 @@ import Students from "./components/Students";
 
 function App() {
   const url = "https://api.hatchways.io/assessment/students";
-  const [data, setData] = useState({ dataLoaded: false, students: null });
+  const [data, setData] = useState(null);
+  const [dataLoaded, setDataLoaded] = useState(false);
   const [tags, setTags] = useState([]);
   const [filteredData, setFilteredData] = useState(null);
   const [filterValues, setFilterValues] = useState({
@@ -13,9 +14,11 @@ function App() {
   });
 
   const getData = async () => {
-    await axios.get(url).then((response) => {
-      setData({ dataLoaded: true, students: response.data.students });
-      setFilteredData(response.data.students);
+    await axios.get(url)
+    .then((response) => {
+      setData(response.data.students)
+      setDataLoaded(true)
+      setFilteredData(response.data.students)
     });
   };
 
@@ -24,21 +27,20 @@ function App() {
   }, [url]);
 
   useEffect(() => {
-    if (data.dataLoaded) {
-      setFilteredData(data.students);
-      data.students.forEach(function (obj) {
+    if (dataLoaded) {
+      setFilteredData(data);
+      calcAverage()
+      data.forEach((obj) => {
         obj.tags = [];
       });
-      console.log(data.students);
     }
-  }, [data]);
+  }, [dataLoaded]);
 
   useEffect(() => {
-    if (data.dataLoaded) {
-      console.log(filterValues);
+    if (dataLoaded) {
       let result = [];
       if (filterValues.nameFilter.indexOf(" ") > 0) {
-        result = data.students.filter((x) => {
+        result = data.filter((x) => {
           let fullname_first = x.firstName.toLowerCase();
           let fullname_last = x.lastName.toLowerCase();
           let name = fullname_first + " " + fullname_last;
@@ -47,7 +49,7 @@ function App() {
           }
         });
       } else if (filterValues.nameFilter.indexOf(" ") === -1) {
-        result = data.students.filter((x) => {
+        result = data.filter((x) => {
           let name_first = x.firstName.toLowerCase();
           let name_last = x.lastName.toLowerCase();
           if (name_first.includes(`${filterValues.nameFilter}`)) {
@@ -83,25 +85,49 @@ function App() {
     });
   };
 
-  const addTag = (student) => {
+  const addTag = (student, e) => {
     let text = document.getElementById("text_" + student.id).value;
     text = text.toLowerCase();
     student.tags.push(text);
-    document.getElementById("text_" + student.id).value = "";
     setTags([...tags, text]);
-    console.log(data);
+    let value = e.target.previousSibling.value
+    let createTag = document.createElement('div')
+    createTag.innerHTML = value
+    createTag.classList.add('tag')
+    e.target.previousSibling.previousSibling.appendChild(createTag)
+    document.getElementById("text_" + student.id).value = "";
   };
+
+  const calcAverage = () => {
+    const students = data
+    students.forEach((x, index) => {
+      const grades = x.grades;
+      for (let i = 0; i < grades.length; i++) {
+        grades[i] = parseInt(grades[i]);
+      }
+      let runningTotal = 0;
+      let z = 0;
+      let avg = 0;
+      grades.forEach((num) => {
+        runningTotal = runningTotal + num
+      })
+      z = grades.length
+      avg = runningTotal/(z)
+      setData([...data], data[index].average = avg)
+    })
+  }
 
   return (
     <>
-      {data.dataLoaded === false && filteredData === null && <p>loading...</p>}
-      {data.dataLoaded === true && filteredData !== null && (
+      {dataLoaded === false && filteredData === null && <p>loading...</p>}
+      {dataLoaded === true && filteredData !== null && (
         <Students
           filteredData={filteredData}
           data={data}
           filterName={filterName}
           filterTag={filterTag}
           addTag={addTag}
+          calcAverage={calcAverage}
         />
       )}
     </>

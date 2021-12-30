@@ -84,6 +84,7 @@ img {
   left: 5px;
   right: 5px;
   z-index: 10;
+  transform: rotate(90deg);
 }
 
 .tagInput {
@@ -96,4 +97,39 @@ img {
   outline: none;
   margin-bottom: 20px;
   margin-left: 220px;
+}
+
+.tags {
+  display: block;
+  padding-left: 220px;
+}
+
+.tag {
+  display: inline-block;
+  padding: 10px;
+  margin: 5px;
+  background-color: lightgrey;
+  border-radius: 5px;
+}
+
+.tagInput {
+  box-sizing: border-box;
+  width: 20%;
+  height: 30px;
+  padding-left: 20px;
+  border: none;
+  border-bottom: 3px solid lightgrey;
+  outline: none;
+  margin-bottom: 20px;
+  margin-left: 220px;
+}
+
+.addTag {
+  background-color: lightgrey;
+  color: grey;
+  border: none;
+  height: 30px;
+  margin: 20px;
+  margin-left: 40px;
+  font-weight: bold;
 }

@@ -4,7 +4,7 @@ import Grades from "./Grades";
 import classes from "./Student.css";
 
 function Student(props) {
-  const { data, filteredData, addTag } = props;
+  const { filteredData, addTag, calcAverage } = props;
 
   const expandGrades = (index) => {
     index++;
@@ -16,6 +16,14 @@ function Student(props) {
       document.getElementById(index).style.display = "none";
     }
   };
+
+  const plusMinus = (e) => {
+    if (getComputedStyle(e.target).getPropertyValue('--minus') === 'none') {
+      e.target.style.setProperty('--minus', 'block')
+    } else {
+      e.target.style.setProperty('--minus', 'none')
+    }
+  }
 
   return (
     <div className="students">
@@ -31,29 +39,29 @@ function Student(props) {
                 <p>Email: {student.email}</p>
                 <p>Company: {student.company}</p>
                 <p>Skill: {student.skill}</p>
-                <p>Average: </p>
+                <p>Average: {student.average}%</p>
               </div>
             </div>
-            <p>{student.tags}</p>
-            {student.tags.map((tag) => {
-              <p>{tag}</p>;
-            })}
+            <Grades student={student}/>
+            {/* {calcAverage(student, index)} */}
             <div className="tags">
+              {student.tags.map((tag) => {
+                <div className="tag">{tag}</div>
+              })}
+            </div>
               <input
                 className="tagInput"
                 type="text"
                 id={`text_${student.id}`}
+                placeholder="Add a tag..."
               />
-              <button onClick={() => addTag(student)}>ADD TAG</button>
-            </div>
-            <Grades student={student} />
+              <button className="addTag" onClick={(e) => addTag(student, e)}>Add Tag</button>
             <button
               className="button expandable"
-              onClick={() => expandGrades(index)}
+              onClick={(e) => {expandGrades(index); plusMinus(e)}}
             ></button>
             <br></br>
             <br></br>
-            <hr></hr>
           </div>
         );
       })}

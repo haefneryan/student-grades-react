@@ -12,12 +12,17 @@
   border-radius: 10px;
 }
 
+.boundingBox::-webkit-scrollbar {
+  display: none;
+}
+
 #searchBar,
 #tagSearchBar {
   box-sizing: border-box;
   width: 100%;
-  height: 50px;
+  height: 40px;
   padding-left: 20px;
+  padding-top: 10px;
   border: none;
   border-bottom: 1px solid lightgrey;
   outline: none;
@@ -26,4 +31,13 @@
 .inputBox {
   padding-left: 20px;
   padding-right: 20px;
+  background-color: white;
+}
+
+.searchBars {
+  display: block;
+  top: 0;
+  background-color: white;
+  position: sticky;
+  z-index: 99;
 }
