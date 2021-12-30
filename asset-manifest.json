@@ -1,0 +1,21 @@
+{
+  "files": {
+    "main.css": "/student-grades-react/static/css/main.f9b8d2dc.chunk.css",
+    "main.js": "/student-grades-react/static/js/main.83eaddf2.chunk.js",
+    "main.js.map": "/student-grades-react/static/js/main.83eaddf2.chunk.js.map",
+    "runtime-main.js": "/student-grades-react/static/js/runtime-main.f393b97e.js",
+    "runtime-main.js.map": "/student-grades-react/static/js/runtime-main.f393b97e.js.map",
+    "static/js/2.6bf531b8.chunk.js": "/student-grades-react/static/js/2.6bf531b8.chunk.js",
+    "static/js/2.6bf531b8.chunk.js.map": "/student-grades-react/static/js/2.6bf531b8.chunk.js.map",
+    "index.html": "/student-grades-react/index.html",
+    "static/css/main.f9b8d2dc.chunk.css.map": "/student-grades-react/static/css/main.f9b8d2dc.chunk.css.map",
+    "static/js/2.6bf531b8.chunk.js.LICENSE.txt": "/student-grades-react/static/js/2.6bf531b8.chunk.js.LICENSE.txt",
+    "static/media/index.css": "/student-grades-react/static/media/Raleway-Medium.e72379e3.woff"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.f393b97e.js",
+    "static/js/2.6bf531b8.chunk.js",
+    "static/css/main.f9b8d2dc.chunk.css",
+    "static/js/main.83eaddf2.chunk.js"
+  ]
+}
